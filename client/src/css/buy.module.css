@@ -1,0 +1,88 @@
+.container{
+  width: 60%;
+  margin: 0 auto;
+}
+.headbuy {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.wrapadd {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  width: 100%;
+}
+
+.wrapadd h2 {
+  text-align: center;
+}
+
+.wrapitem {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.butbuy {
+  padding: 10px 20px;
+  background-color: #464748;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  margin-top: 40px;
+  transition: 0.5s;
+}
+
+.butbuy:hover {
+  background-color: #a0a0a0;
+}
+
+.imgbuy {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto; 
+  display: block;
+}
+.wrapdescbuy{
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.wrapphoto{
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 30%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.headbuy2{
+  margin-bottom: 50px;
+}
+.inputbuy{
+  display: block;
+  width: 100%;
+  height: 2vw;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.totalbuy{
+  font-weight: bold;
+}
+.imgbuy1{
+  object-fit: cover;
+  margin: 0 auto; 
+  display: block; 
+  width: 300px;
+  height: 350px;
+}

@@ -1,0 +1,117 @@
+
+  
+  .background-image {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/background.avif");
+    background-size: cover;
+
+  }
+  
+  .loginWrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    padding: 70px;
+    width: 450px;
+    background: white; /* กำหนดพื้นหลังเป็นสีขาว */
+}
+
+  
+  .loginWrapper h2 {
+    color: #000000;
+    font-size: 2rem;
+  }
+  
+  .loginWrapper form {
+    margin: 25px 0 65px;
+  }
+  
+  .loginWrapper form label {
+    color: #000000;
+  }
+  
+  .loginWrapper form .form-control {
+    height: 50px;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  
+  .buttonlogin {
+    height: 3vw;
+    width: 20vw; 
+    background: #b2b2b2;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    color: #000000;
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+  
+  
+  .loginWrapper form .form-control input:focus,
+  .loginWrapper form .form-control input:valid {
+    background: #444;
+    padding: 16px 20px 0;
+  }
+  
+  .loginWrapper form .form-control label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+    color: #8c8c8c;
+    transition: all 0.1s ease;
+  }
+  
+  .loginWrapper form .form-control input:focus ~ label,
+  .loginWrapper form .form-control input:valid ~ label {
+    font-size: 0.75rem;
+    transform: translateY(-130%);
+  }
+  
+  .loginWrapper form button {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1rem;
+    background: #464748;;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    margin: 25px 0 10px;
+    cursor: pointer;
+    transition: 0.1s ease;
+  }
+  
+  .loginWrapper form button:hover {
+    background-color: rgb(141, 139, 139);
+  }
+  
+  .loginWrapper a {
+    text-decoration: none;
+  }
+  
+  .loginWrapper a:hover {
+    text-decoration: underline;
+  }
+  
+  .loginWrapper :where(label, p, small, a) {
+    color: #b3b3b3;
+  }
+  
+  .loginWrapper small {
+    display: block;
+    margin-top: 15px;
+    color: #b3b3b3;
+  }
+  

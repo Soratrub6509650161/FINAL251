@@ -1,0 +1,103 @@
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* ทำให้ส่วนนี้เต็มหน้าจอ */
+    height: 100vh; /* ทำให้ส่วนนี้เต็มหน้าจอ */
+    scroll-snap-align: start; /* ช่วยให้เลื่อนลงมาอยู่ในตำแหน่งที่ถูกต้อง */
+    scroll-snap-stop: always; /* ทำให้หน้าใหม่เริ่มต้นจากขอบบนของหน้าจอ */
+    margin-top: 4vw;
+}
+
+.logo {
+    position: relative;
+}
+
+.logo img {
+    width: 100%; /* กำหนดความกว้างเท่ากับ 100% ของพื้นที่ที่รูปอยู่ */
+    height: 100%; /* กำหนดความสูงเท่ากับ 100% ของพื้นที่ที่รูปอยู่ */
+    object-fit: cover; /* ปรับให้รูปภาพเต็มขนาดและปรับให้เต็มขอบ */
+    filter: brightness(70%);
+}
+
+
+.textContainer {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.ht {
+    color: rgb(255, 255, 255);
+    font-size: 8vw; /* ปรับขนาดตัวอักษรตามต้องการ */
+    font-weight: bold;
+}
+
+.moreLink {
+    margin-top: 20px; /* ปรับตำแหน่งตามต้องการ */
+}
+
+.btn {
+    font-size: 1.5rem; /* ปรับขนาดของปุ่มให้ใหญ่ขึ้น โดยใช้หน่วย rem */
+    padding: 8px 20px; /* ปรับขนาดพื้นที่ภายในของปุ่ม */
+}
+footer {
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+}
+
+.social-media {
+    display: flex; /* หรือ display: grid; ขึ้นอยู่กับวิธีการจัดวางที่คุณต้องการ */
+    justify-content: center; /* จัดให้ส่วนของ social media อยู่ตรงกลาง */
+    margin-left: 20px;
+}
+
+.social-media-link {
+    margin: 0 10px;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+
+.instagram {
+    background-color: #e4405f;
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+
+.ig, .facebook, .line {
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+    width: 50px; /* เพิ่มความกว้างตามที่ต้องการ */
+    height: 50px; /* เพิ่มความสูงตามที่ต้องการ */
+    display: flex; /* ทำให้เนื้อหาภายในปรับตำแหน่งกลาง */
+    justify-content: center; /* จัดเนื้อหาให้อยู่ตรงกลางตามแนวนอน */
+    align-items: center; /* จัดเนื้อหาให้อยู่ตรงกลางตามแนวตั้ง */
+    border-radius: 50%; /* ทำให้มีรูปร่างเป็นวงกลม */
+    text-decoration: none;
+}
+footer {
+    background-color: transparent; /* หรือ background-color: none; */
+    background-image: none;
+}
+
+
+
+
+
+
+
+
+
+
+
