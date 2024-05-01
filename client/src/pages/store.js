@@ -32,7 +32,7 @@ function Store({ isLoggedIn }) {
     axios.get(`http://localhost:3001/Store`).then((response) => {
       setListOfPosts(response.data);
     });
-  }, []); 
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -66,11 +66,12 @@ function Store({ isLoggedIn }) {
     }
   };
 
-  const handleEditProduct = (productName) => {
-    navigate(`/Edit-product/${selectedProduct.itemID}`, { state: { productName } });
-};
+  const handleEditProduct = (productName, previousPrice, previousDescription, previousphotoP) => {
+    navigate(`/Edit-product/${selectedProduct.itemID}`, { state: { productName, previousPrice, previousDescription, previousphotoP } });
+  };
 
-  
+
+
 
   const closeModel = () => {
     setIsModelOpen(false);
@@ -78,7 +79,7 @@ function Store({ isLoggedIn }) {
 
   const addToCart = () => {
     if (!isLoggedIn) {
-      navigate('/login'); 
+      navigate('/login');
       return;
     }
 
@@ -94,6 +95,7 @@ function Store({ isLoggedIn }) {
       productPrice: selectedProduct.price,
       size: selectedSize,
     }).then((response) => {
+      // เปลี่ยนการแจ้งเตือนจาก alert เป็น SweetAlert
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -102,9 +104,49 @@ function Store({ isLoggedIn }) {
 
       console.log("Product added to cart successfully:", response.data);
     }).catch((error) => {
-      console.error("Error adding product to cart:", error);
+      Swal.fire({
+        icon: 'warning',
+        title: 'Out of stock!',
+        text: 'Out of stock!',
+      });
     });
   };
+
+  const handleDeleteProduct = (productName) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this product.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:3001/product/delete/${productName}`)
+          .then((response) => {
+            Swal.fire(
+              'Deleted!',
+              'The product has been deleted.',
+              'success'
+            );
+            // หลังจากลบสำเร็จให้ทำการโหลดสินค้าใหม่
+            axios.get(`http://localhost:3001/Store`).then((response) => {
+              setListOfPosts(response.data);
+            });
+          })
+          .catch((error) => {
+            console.error('Error deleting product:', error);
+            Swal.fire(
+              'Error!',
+              'An error occurred while deleting the product.',
+              'error'
+            );
+          });
+      }
+    });
+  };
+
 
   return (
     <div>
@@ -156,11 +198,13 @@ function Store({ isLoggedIn }) {
                 ) : null}
                 <div className="btn-control">
                   <button className="btn1" onClick={closeModel}>Close</button>
-                  {userType === "admin"  ? (
-                    <button className="btn1 btn-buy" onClick={() => handleEditProduct(modelProduct.name)}>Edit Product</button>
-
+                  {userType === "admin" ? (
+                    <button className="btn1 btn-buy" onClick={() => handleEditProduct(modelProduct.name, modelProduct.price, modelProduct.description, modelProduct.photoP)}>Edit Product</button>
                   ) : (
                     <button className="btn1 btn-buy" onClick={addToCart}>Add to cart</button>
+                  )}
+                  {userType === "admin" && (
+                    <button className="btn1 btn-buy" onClick={() => handleDeleteProduct(modelProduct.name)}>Delete Product</button>
                   )}
                 </div>
               </div>

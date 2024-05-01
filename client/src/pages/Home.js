@@ -72,9 +72,6 @@ const Home = () => {
                     <a className={styles.line} href="#!" role="button">
                         <i className="fab fa-line"></i>
                     </a>
-                    <a className={styles.line} href="/chat" role="button" id="chat">
-                        <i className="fa-solid fa-comment" id="chat"></i>
-                    </a>
                 </nav>
             </footer>
 

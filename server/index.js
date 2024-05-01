@@ -35,8 +35,6 @@ app.use("/Signup",RegisRouter);
 app.use("/product",productRouter);
 
 
-
-
 app.listen(3001, () => {
     console.log("Server running on port 3001");
 });

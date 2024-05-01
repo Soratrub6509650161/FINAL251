@@ -57,6 +57,7 @@ function App() {
                   <Link to="/store">
                     <i className="fa-brands fa-product-hunt"></i>
                   </Link>
+                  <Link className="dropdown-item" to="/" onClick={handleLogout}>Logout</Link>
                 </>
               ) : (
                 <>
@@ -177,7 +178,6 @@ function App() {
     const newCartItems = [...cartItems];
     newCartItems[index].quantity++;
     setCartItems(newCartItems);
-    // เรียกใช้ API เพื่อเพิ่มจำนวนสินค้าในตะกร้าของผู้ใช้
     const updatedProductId = cartItems[index].itemID;
     axios.put('http://localhost:3001/mycart/increase', { userId: userId, productId: updatedProductId, quantity: newCartItems[index].quantity })
       .then(response => {
@@ -246,7 +246,7 @@ function App() {
           <Route path="/buy/:id" element={<Buy />} />
           <Route path="/History/:id" element={<History />} />
           <Route path="/Edit-product/:itemID" element={<EditP userId={userId}/>}/> 
-          <Route path="/AddnewProduct" element={<AddnewProduct userId={userId}/>}/>
+          <Route path="/AddnewProduct" element={<AddnewProduct userId={userId}/>}/> 
         </Routes>
       </Router >
     </div >

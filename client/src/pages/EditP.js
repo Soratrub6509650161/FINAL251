@@ -13,6 +13,10 @@ const EditP = ({ userId }) => {
         ProductName: '',
         Price: '',
         description: '',
+        previousPrice: '',
+        previousDescription: '',
+        countproduct: 0,
+        Size: '', // เพิ่ม state สำหรับเก็บไซส์
     });
     const [selectedFile, setSelectedFile] = useState(null);
     const { itemID } = useParams();
@@ -20,6 +24,13 @@ const EditP = ({ userId }) => {
     useEffect(() => {
         if (location.state && location.state.productName) {
             setProductName(location.state.productName);
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                productName: location.state.productName,
+                previousPrice: location.state.previousPrice,
+                previousDescription: location.state.previousDescription,
+            }));
+            setUrl(location.state.previousphotoP);
         }
     }, [location.state]);
 
@@ -38,37 +49,40 @@ const EditP = ({ userId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formDataCloudinary = new FormData();
-            formDataCloudinary.append('file', selectedFile);
-            formDataCloudinary.append("upload_preset", "myCloud");
-            formDataCloudinary.append("cloud_name", "ddlsqqncv");
+            let imageUrl = url;
+            if (selectedFile) {
+                const formDataCloudinary = new FormData();
+                formDataCloudinary.append('file', selectedFile);
+                formDataCloudinary.append("upload_preset", "myCloud");
+                formDataCloudinary.append("cloud_name", "ddlsqqncv");
 
-            const cloudinaryRes = await axios.post('https://api.cloudinary.com/v1_1/dbyoondqs/image/upload', formDataCloudinary);
+                const cloudinaryRes = await axios.post('https://api.cloudinary.com/v1_1/dbyoondqs/image/upload', formDataCloudinary);
 
-            const cloudData = cloudinaryRes.data;
-            setUrl(cloudData.url);
-            
+                const cloudData = cloudinaryRes.data;
+                imageUrl = cloudData.url;
+            }
             await axios.post('http://localhost:3001/product/Edit', {
-                ProductName: formData.ProductName,
-                price: formData.Price,
-                description: formData.description,
+                ProductName: formData.ProductName || productName,
+                price: formData.Price || formData.previousPrice,
+                description: formData.description || formData.previousDescription,
                 productName: productName,
-                imageUrl: cloudData.url,
-                amID : userId,
-                itemID : itemID
+                imageUrl: imageUrl,
+                amID: userId,
+                itemID: itemID,
+                size: formData.Size, // เพิ่มการส่งไซส์ไปยังเซิร์ฟเวอร์
+                countproduct: formData.countproduct // ต้องการแก้จำนวนของเฉพาะไซส์นั้น
             });
             Swal.fire({
                 title: 'อัพเดทสำเร็จ!',
                 text: 'Data updated successfully',
                 icon: 'success',
                 confirmButtonText: 'ตกลง'
-            })
+            });
             navigate('/store');
         } catch (error) {
             console.error('Error updating product data:', error);
         }
     };
-
 
     return (
         <main className={styles.backgroundimage}>
@@ -108,6 +122,35 @@ const EditP = ({ userId }) => {
                                     value={formData.description}
                                     onChange={handleChange}
                                     placeholder="Description"
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <select
+                                    id="Size"
+                                    name="Size"
+                                    value={formData.Size}
+                                    onChange={handleChange}
+                                    className="form-control"
+                                >
+                                    <option Value="">Size</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="">-</option>
+                                </select>
+                            </div>
+                            <div className="col-md-4">
+                                <input
+                                    type="text"
+                                    name="countproduct"
+                                    id="countproduct"
+                                    className="form-control"
+                                    value={formData.countproduct || ''}
+                                    onChange={handleChange}
+                                    placeholder="Count"
                                 />
                             </div>
                         </div>

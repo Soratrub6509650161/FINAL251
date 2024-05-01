@@ -8,13 +8,13 @@ const AddnewProduct = ({ userId }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [productName, setProductName] = useState('');
-    const [url, setUrl] = useState('');
     const [formData, setFormData] = useState({
         ProductName: '',
         Price: '',
         description: '',
-        Size: '', // Added
-        TypeProduct: '', // Added
+        Size: '',
+        TypeProduct: '',
+        countproduct: 0
     });
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -47,16 +47,16 @@ const AddnewProduct = ({ userId }) => {
             const cloudinaryRes = await axios.post('https://api.cloudinary.com/v1_1/dbyoondqs/image/upload', formDataCloudinary);
 
             const cloudData = cloudinaryRes.data;
-            setUrl(cloudData.url);
 
             await axios.post('http://localhost:3001/product/Add', {
                 ProductName: formData.ProductName,
                 Price: formData.Price,
                 description: formData.description,
-                Size: formData.Size, // Changed
-                TypeProduct: formData.TypeProduct, // Changed
+                Size: formData.Size,
+                TypeProduct: formData.TypeProduct,
+                countproduct: formData.countproduct,
                 imageUrl: cloudData.url,
-                amID : userId
+                amID: userId
             });
             Swal.fire({
                 title: 'เพิ่มสินค้าสำเร็จ!',
@@ -84,7 +84,7 @@ const AddnewProduct = ({ userId }) => {
                                     name="ProductName"
                                     id="ProductName"
                                     className="form-control"
-                                    value={formData.ProductName || ''}
+                                    value={formData.ProductName}
                                     onChange={handleChange}
                                     placeholder="Product Name"
                                 />
@@ -122,7 +122,7 @@ const AddnewProduct = ({ userId }) => {
                                     onChange={handleChange}
                                     className="form-control"
                                 >
-                                    <option Value="">Size</option>
+                                    <option value="">Size</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
@@ -138,13 +138,24 @@ const AddnewProduct = ({ userId }) => {
                                     onChange={handleChange}
                                     className="form-control"
                                 >
-                                    <option disabled selected>TypeProduct</option>
+                                    <option value="" defaultValue disabled>TypeProduct</option>
                                     <option value="S">Shirt</option>
                                     <option value="P">Pant</option>
                                     <option value="H">Hat</option>
                                     <option value="B">Bag</option>
                                     <option value="N">Necklace</option>
                                 </select>
+                            </div>
+                            <div className="col-md-4">
+                                <input
+                                    type="text"
+                                    name="countproduct"
+                                    id="countproduct"
+                                    className="form-control"
+                                    value={formData.countproduct}
+                                    onChange={handleChange}
+                                    placeholder="Count"
+                                />
                             </div>
                         </div>
                         <div className="row">
@@ -154,7 +165,7 @@ const AddnewProduct = ({ userId }) => {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary" id="config">
-                            Confirm Edit
+                            AddProduct
                         </button>
                     </form>
                 </div>
